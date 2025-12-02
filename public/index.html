@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="el">
+  <head>
+    <meta charset="UTF-8" />
+    <title data-i18n="appTitle">Portal Αδειών</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="styles.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="app">
+      <!-- LOGIN VIEW -->
+      <div id="loginView">
+        <div class="card login-card">
+          <img src="images/logo.png" alt="Logo" class="logo login-logo" />
+          <p data-i18n="loginSubtitle">
+            Σύνδεση με τηλέφωνο και κωδικό
+          </p>
+
+          <form id="loginForm">
+            <label for="phoneInput" data-i18n="labelPhone">Τηλέφωνο</label>
+            <input id="phoneInput" type="text" autocomplete="off" required />
+
+            <label for="passwordInput" data-i18n="labelPassword">Κωδικός</label>
+            <input
+              id="passwordInput"
+              type="password"
+              autocomplete="off"
+              required
+            />
+
+            <button type="submit" data-i18n="btnLogin">Σύνδεση</button>
+          </form>
+
+          <div id="loginError" class="error-message"></div>
+
+          <div class="lang-switcher">
+            <button type="button" id="langEl">Ελληνικά</button>
+            <button type="button" id="langEn">English</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- PASSWORD CHANGE VIEW -->
+      <div id="passwordChangeView" class="hidden">
+        <div class="card login-card">
+          <img src="images/logo.png" alt="Logo" class="logo login-logo" />
+          <h1 data-i18n="changePwdTitle">Αλλαγή αρχικού κωδικού</h1>
+          <p data-i18n="changePwdSubtitle">
+            Για λόγους ασφαλείας, παρακαλώ αλλάξτε τον αρχικό κωδικό πρόσβασης.
+          </p>
+
+          <form id="passwordChangeForm">
+            <label for="oldPasswordInput" data-i18n="labelOldPassword"
+              >Τρέχων κωδικός</label
+            >
+            <input
+              id="oldPasswordInput"
+              type="password"
+              autocomplete="off"
+              required
+            />
+
+            <label for="newPasswordInput" data-i18n="labelNewPassword"
+              >Νέος κωδικός</label
+            >
+            <input
+              id="newPasswordInput"
+              type="password"
+              autocomplete="off"
+              required
+            />
+
+            <label
+              for="newPasswordConfirmInput"
+              data-i18n="labelNewPasswordConfirm"
+              >Επιβεβαίωση νέου κωδικού</label
+            >
+            <input
+              id="newPasswordConfirmInput"
+              type="password"
+              autocomplete="off"
+              required
+            />
+
+            <button type="submit" data-i18n="btnChangePassword">
+              Αλλαγή κωδικού
+            </button>
+          </form>
+
+          <div id="passwordChangeError" class="error-message"></div>
+        </div>
+      </div>
+
+      <!-- MAIN VIEW -->
+      <div id="mainView" class="hidden">
+        <header class="top-bar">
+          <div class="top-bar-left">
+            <img src="images/logo.png" alt="Logo" class="logo top-logo" />
+            <div class="top-bar-text">
+              <div id="currentUserInfo"></div>
+            </div>
+          </div>
+          <div class="top-bar-right">
+            <div class="lang-switcher">
+              <button type="button" id="langElMain">Ελληνικά</button>
+              <button type="button" id="langEnMain">English</button>
+            </div>
+            <button id="logoutButton" data-i18n="btnLogout">
+              Αποσύνδεση
+            </button>
+          </div>
+        </header>
+
+        <div class="main-layout">
+          <nav class="sidebar">
+            <button
+              class="nav-button active"
+              data-section="calendarSection"
+              data-i18n="navCalendar"
+            >
+              Ημερολόγιο & αιτήσεις μου
+            </button>
+
+
+            <button
+              class="nav-button user-only"
+              data-section="profileSection"
+              data-i18n="navProfile"
+            >
+              Το προφίλ μου
+            </button>
+
+            <button
+              class="nav-button admin-only"
+              data-section="adminStaffSection"
+              data-i18n="navStaff"
+            >
+              Διαχείριση προσωπικού
+            </button>
+            <button
+              class="nav-button admin-only"
+              data-section="adminLeavesSection"
+              data-i18n="navAdminLeaves"
+            >
+              Αιτήσεις προσωπικού
+            </button>
+          </nav>
+
+          <main class="content">
+            <!-- Calendar section -->
+            <section id="calendarSection" class="section visible">
+              <div class="section-header">
+                <h2 data-i18n="calendarTitle">
+                  Ημερολόγιο & αιτήσεις μου
+                </h2>
+              </div>
+
+              <!-- Φόρμα νέας αίτησης για τον ίδιο χρήστη (θα κρυφτεί για admin) -->
+              <div class="card" id="myNewLeaveCard">
+                <form id="newLeaveForm" class="flex-row">
+                  <div class="form-group">
+                    <label for="myKind" data-i18n="labelKind"
+                      >Τύπος εγγραφής</label
+                    >
+                    <select id="myKind">
+                      <option value="leave" data-i18n="optionLeave">
+                        Άδεια
+                      </option>
+                      <option value="repo" data-i18n="optionRepo">
+                        Ρεπό
+                      </option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="myStartDate" data-i18n="labelFrom">Από</label>
+                    <input type="date" id="myStartDate" required />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="myEndDate" data-i18n="labelTo">Έως</label>
+                    <input type="date" id="myEndDate" required />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="myType" data-i18n="labelLeaveType"
+                      >Τύπος άδειας</label
+                    >
+                    <select id="myType">
+                      <option value="annual" data-i18n="optionAnnual">
+                        Κανονική
+                      </option>
+                      <option value="sick" data-i18n="optionSick">
+                        Ασθενείας
+                      </option>
+                      <option value="other" data-i18n="optionOther">
+                        Άλλη
+                      </option>
+                    </select>
+                  </div>
+
+                  <button type="submit" data-i18n="btnNewRequest">
+                    Νέα αίτηση
+                  </button>
+                </form>
+              </div>
+
+              <!-- Ημερολόγιο -->
+              <div class="card">
+                <div id="calendarContainer" class="calendar-container"></div>
+
+                <aside id="infoPanel" class="info-panel">
+                  <h3 data-i18n="dayInfoTitle">Πληροφορίες ημέρας</h3>
+                  <div id="infoPanelContent" data-i18n="dayInfoHint">
+                    Πάτησε σε ένα όνομα στο ημερολόγιο για λεπτομέρειες.
+                  </div>
+                </aside>
+              </div>
+            </section>
+
+
+            <!-- User profile section -->
+            <section id="profileSection" class="section hidden">
+              <div class="section-header">
+                <h2 data-i18n="profileTitle">Τα στοιχεία μου</h2>
+              </div>
+              <div class="card">
+                <form id="profileForm" class="flex-row">
+                  <div class="form-group">
+                    <label for="profileFirstName" data-i18n="labelFirstName">Όνομα</label>
+                    <input id="profileFirstName" type="text" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="profileLastName" data-i18n="labelLastName">Επώνυμο</label>
+                    <input id="profileLastName" type="text" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="profilePhone" data-i18n="labelPhone">Τηλέφωνο</label>
+                    <input id="profilePhone" type="text" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="profileEmail" data-i18n="labelEmail">Email</label>
+                    <input id="profileEmail" type="email" />
+                  </div>
+                </form>
+                <div class="form-actions">
+                  <button id="profileSaveButton" class="btn-primary" type="button" data-i18n="btnSaveProfile">
+                    Αποθήκευση
+                  </button>
+                  <div id="profileMessage" class="status-message"></div>
+                </div>
+              </div>
+            </section>
+
+                        <!-- My leaves section (user μόνο) -->
+            <section id="myLeavesSection" class="section hidden user-only">
+              <div class="section-header">
+                <h2 data-i18n="myLeavesTitle">Οι αιτήσεις μου</h2>
+              </div>
+              <div class="card">
+                <h3 data-i18n="myLeavesHistory">Οι αιτήσεις μου</h3>
+                <table class="table" id="myLeavesTable">
+                  <thead>
+                    <tr>
+                      <th data-i18n="thKind">Είδος</th>
+                      <th data-i18n="thFrom">Από</th>
+                      <th data-i18n="thTo">Έως</th>
+                      <th data-i18n="thType">Τύπος</th>
+                      <th data-i18n="thStatus">Κατάσταση</th>
+                      <th data-i18n="thActions">Ενέργειες</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+            </section>
+
+<!-- Admin staff section -->
+            <section id="adminStaffSection" class="section hidden">
+              <div class="section-header">
+                <h2 data-i18n="staffTitle">Διαχείριση προσωπικού</h2>
+              </div>
+
+              <div class="card">
+                <h3 data-i18n="staffListTitle">Λίστα προσωπικού</h3>
+
+                <div class="flex-row">
+                  <div class="form-group">
+                    <label for="staffSearch" data-i18n="labelStaffSearch"
+                      >Αναζήτηση</label
+                    >
+                    <input id="staffSearch" type="text" />
+                  </div>
+                </div>
+
+                <table class="table" id="staffTable">
+                  <thead>
+                    <tr>
+                      <th data-i18n="thFirstName">Όνομα</th>
+                      <th data-i18n="thLastName">Επώνυμο</th>
+                      <th data-i18n="thPhone">Τηλέφωνο</th>
+                      <th data-i18n="thEmail">Email</th>
+                      <th data-i18n="thRole">Ρόλος</th>
+                      <th data-i18n="thAnnualDays">Ημέρες άδειας</th>
+                      <th data-i18n="thDepartment">Τμήμα</th>
+                      <th data-i18n="thStaffActions" class="staff-actions-col">Ενέργειες</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+
+              <div class="card">
+                <h3 data-i18n="newStaffTitle">Νέο μέλος</h3>
+                <form id="newStaffForm" class="flex-row">
+                  <div class="form-group">
+                    <label for="newFirstName" data-i18n="labelFirstName"
+                      >Όνομα</label
+                    >
+                    <input id="newFirstName" type="text" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="newLastName" data-i18n="labelLastName"
+                      >Επώνυμο</label
+                    >
+                    <input id="newLastName" type="text" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="newPhone" data-i18n="labelPhone"
+                      >Τηλέφωνο</label
+                    >
+                    <input id="newPhone" type="text" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="newEmail" data-i18n="labelEmail">Email</label>
+                    <input id="newEmail" type="email" />
+                  </div>
+                  <div class="form-group">
+                    <label for="newPassword" data-i18n="labelPassword"
+                      >Κωδικός</label
+                    >
+                    <input id="newPassword" type="password" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="newRole" data-i18n="labelRole">Ρόλος</label>
+                    <select id="newRole">
+                      <option value="user" data-i18n="optionUser">
+                        User
+                      </option>
+                      <option value="admin" data-i18n="optionAdmin">
+                        Admin
+                      </option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="newAnnualDays" data-i18n="labelAnnualDays"
+                      >Ημέρες άδειας</label
+                    >
+                    <input
+                      id="newAnnualDays"
+                      type="number"
+                      min="0"
+                      value="20"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="newDepartmentSelect" data-i18n="labelDepartment"
+                      >Τμήμα</label
+                    >
+                    <select id="newDepartmentSelect">
+                      <option value="" data-i18n="optionNoDepartment">
+                        Χωρίς τμήμα
+                      </option>
+                    </select>
+                  </div>
+                  <button type="submit" data-i18n="btnAddStaff">
+                    Προσθήκη
+                  </button>
+                </form>
+              </div>
+
+              <!-- Διαχείριση τμημάτων -->
+              <div class="card">
+                <h3 data-i18n="departmentsTitle">Διαχείριση τμημάτων</h3>
+                <form id="newDeptForm" class="flex-row">
+                  <div class="form-group">
+                    <label for="newDeptName" data-i18n="labelDeptName"
+                      >Όνομα τμήματος</label
+                    >
+                    <input id="newDeptName" type="text" />
+                  </div>
+                  <div class="form-group">
+                    <label for="newDeptColor" data-i18n="labelDeptColor"
+                      >Χρώμα</label
+                    >
+                    <input
+                      id="newDeptColor"
+                      type="color"
+                      value="#0ea5e9"
+                    />
+                  </div>
+                  <button type="submit" data-i18n="btnAddDept">
+                    Προσθήκη τμήματος
+                  </button>
+                </form>
+
+                <table class="table" id="departmentsTable">
+                  <thead>
+                    <tr>
+                      <th data-i18n="thDeptName">Τμήμα</th>
+                      <th data-i18n="thDeptColor">Χρώμα</th>
+                      <th data-i18n="thDeptActions">Ενέργειες</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+
+              <!-- Ιστορικό αδειών εργαζομένου -->
+              <div class="card" id="staffHistoryCard" style="display: none">
+                <h3 data-i18n="staffHistoryTitle">Ιστορικό αδειών</h3>
+                <p id="staffHistoryHeader"></p>
+                <table class="table" id="staffHistoryTable">
+                  <thead>
+                    <tr>
+                      <th data-i18n="thKind">Είδος</th>
+                      <th data-i18n="thFrom">Από</th>
+                      <th data-i18n="thTo">Έως</th>
+                      <th data-i18n="thType">Τύπος</th>
+                      <th data-i18n="thStatus">Κατάσταση</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+
+                <div id="staffHistorySummary" class="history-summary"></div>
+
+                <button
+                  type="button"
+                  id="closeStaffHistoryBtn"
+                  data-i18n="btnCloseHistory"
+                >
+                  Κλείσιμο
+                </button>
+              </div>
+            </section>
+
+            <!-- Admin leaves section -->
+            <section id="adminLeavesSection" class="section hidden">
+              <div class="section-header">
+                <h2 data-i18n="adminLeavesTitle">Αιτήσεις προσωπικού</h2>
+              </div>
+
+              <div class="card">
+                <h3 data-i18n="adminLeavesListTitle">Λίστα αιτήσεων</h3>
+                <div class="flex-row">
+                  <div class="form-group">
+                    <label
+                      for="adminStatusFilter"
+                      data-i18n="labelStatusFilter"
+                      >Φίλτρο κατάστασης</label
+                    >
+                    <select id="adminStatusFilter">
+                      <option value="" data-i18n="optionAllStatuses">
+                        Όλες
+                      </option>
+                      <option value="pending" data-i18n="optionPending">
+                        Σε αναμονή
+                      </option>
+                      <option value="approved" data-i18n="optionApproved">
+                        Εγκεκριμένες
+                      </option>
+                      <option value="rejected" data-i18n="optionRejected">
+                        Απορριφθείσες
+                      </option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label
+                      for="adminEmployeeFilter"
+                      data-i18n="labelEmployeeFilter"
+                      >Φίλτρο εργαζόμενου</label
+                    >
+                    <select id="adminEmployeeFilter">
+                      <option value="" data-i18n="optionAllEmployees">
+                        Όλοι
+                      </option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="adminKindFilter" data-i18n="labelKindFilter"
+                      >Φίλτρο είδους</label
+                    >
+                    <select id="adminKindFilter">
+                      <option value="" data-i18n="optionAllKinds">Όλα</option>
+                      <option value="leave" data-i18n="optionLeaveFilter">
+                        Άδειες
+                      </option>
+                      <option value="repo" data-i18n="optionRepoFilter">
+                        Ρεπό
+                      </option>
+                    </select>
+                  </div>
+                </div>
+
+                <table class="table" id="adminLeavesTable">
+                  <thead>
+                    <tr>
+                      <th data-i18n="thEmployee">Εργαζόμενος</th>
+                      <th data-i18n="thKind">Είδος</th>
+                      <th data-i18n="thFrom">Από</th>
+                      <th data-i18n="thTo">Έως</th>
+                      <th data-i18n="thType">Τύπος</th>
+                      <th data-i18n="thStatus">Κατάσταση</th>
+                      <th data-i18n="thActions">Ενέργειες</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+
+              <div class="card" id="adminEditCard" style="display: none">
+                <h3 data-i18n="editRequestTitle">Επεξεργασία αίτησης</h3>
+                <form id="adminEditForm" class="flex-row">
+                  <input type="hidden" id="editLeaveId" />
+                  <div class="form-group">
+                    <label for="editKind" data-i18n="labelKind"
+                      >Είδος</label
+                    >
+                    <select id="editKind">
+                      <option value="leave" data-i18n="optionLeave">
+                        Άδεια
+                      </option>
+                      <option value="repo" data-i18n="optionRepo">
+                        Ρεπό
+                      </option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="editStartDate" data-i18n="labelFrom"
+                      >Από</label
+                    >
+                    <input type="date" id="editStartDate" />
+                  </div>
+                  <div class="form-group">
+                    <label for="editEndDate" data-i18n="labelTo">Έως</label>
+                    <input type="date" id="editEndDate" />
+                  </div>
+                  <div class="form-group">
+                    <label for="editStatus" data-i18n="labelStatus"
+                      >Κατάσταση</label
+                    >
+                    <select id="editStatus">
+                      <option value="pending" data-i18n="optionPending">
+                        Σε αναμονή
+                      </option>
+                      <option value="approved" data-i18n="optionApproved">
+                        Εγκεκριμένη
+                      </option>
+                      <option value="rejected" data-i18n="optionRejected">
+                        Απορριφθείσα
+                      </option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="editType" data-i18n="labelLeaveType"
+                      >Τύπος άδειας</label
+                    >
+                    <select id="editType">
+                      <option value="annual" data-i18n="optionAnnual">
+                        Κανονική
+                      </option>
+                      <option value="sick" data-i18n="optionSick">
+                        Ασθενείας
+                      </option>
+                      <option value="other" data-i18n="optionOther">
+                        Άλλη
+                      </option>
+                      <option value="repo" data-i18n="optionRepo">Ρεπό</option>
+                    </select>
+                  </div>
+                  <button type="submit" data-i18n="btnSave">
+                    Αποθήκευση
+                  </button>
+                </form>
+              </div>
+            </section>
+          </main>
+        </div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

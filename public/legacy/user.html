@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="el">
+<head>
+  <meta charset="utf-8"/>
+  <title>Leave Portal – Χρήστης</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <link rel="stylesheet" href="/styles.css"/>
+</head>
+<body class="bg">
+  <div class="topbar">
+    <img src="/logo.png" class="logo" alt="logo"/>
+    <div class="app-title">Leave Portal</div>
+    <div class="spacer"></div>
+    <div id="userName" class="user-badge"></div>
+    <button class="btn ghost" id="logout">Αποσύνδεση</button>
+  </div>
+
+  <div class="container grid2">
+    <div class="card">
+      <h2>Ημερολόγιο</h2>
+      <div class="row">
+        <input id="from" class="input" type="date" />
+        <input id="to" class="input" type="date" />
+        <button class="btn" id="addLeave">Αίτηση Άδειας</button>
+      </div>
+      <div class="row">
+        <input id="repoDate" class="input" type="date"/>
+        <button class="btn secondary" id="addRepo">Υποβολή Ρεπό (μονοήμερο)</button>
+      </div>
+      <div id="calendar" class="calendar"></div>
+      <div class="legend">
+        <span class="dot green"></span> Εγκεκριμένη &nbsp;
+        <span class="dot yellow"></span> Εκκρεμής &nbsp;
+        <span class="dot pink"></span> Ρεπό (ορατό μόνο σε εσένα & admin) &nbsp;
+        <span class="dot holiday"></span> Αργία
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Οι υποβολές μου</h3>
+      <div id="myList" class="list"></div>
+    </div>
+  </div>
+
+  <script src="/shared.js"></script>
+  <script src="/user.js"></script>
+</body>
+</html>

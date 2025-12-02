@@ -1,0 +1,100 @@
+[
+  {
+    "id": 1,
+    "firstName": "Admin",
+    "lastName": "User",
+    "phone": "6900000000",
+    "password": "123",
+    "role": "admin",
+    "annualLeaveDays": 25,
+    "mustChangePassword": false,
+    "departmentName": "ΔΙΟΙΚΗΣΗ",
+    "departmentColor": "#6366f1",
+    "email": "admin@example.com"
+  },
+  {
+    "id": 2,
+    "firstName": "ΓΕΩΡΓΙΟΣ",
+    "lastName": "ΦΤΟΥΛΗΣ",
+    "phone": "6900000001",
+    "password": "123",
+    "role": "user",
+    "annualLeaveDays": 20,
+    "mustChangePassword": false,
+    "departmentName": "ΠΩΛΗΤΗΣ",
+    "departmentColor": "ΜΠΛΕ"
+  },
+  {
+    "id": 3,
+    "firstName": "ΒΑΣΙΛΙΚΗ",
+    "lastName": "ΚΑΝΔΗΛΙΩΤΗ",
+    "phone": "6900000002",
+    "password": "123",
+    "role": "user",
+    "annualLeaveDays": 20,
+    "mustChangePassword": false,
+    "departmentName": "ΤΑΜΕΙΟ",
+    "departmentColor": "#f97316"
+  },
+  {
+    "id": 4,
+    "firstName": "ΑΑΣ",
+    "lastName": "ΔΗΜΗΤΡΗΣ",
+    "phone": "6900000003",
+    "password": "123",
+    "role": "user",
+    "annualLeaveDays": 20,
+    "mustChangePassword": false,
+    "departmentName": "ΑΠΟΘΗΚΗ",
+    "departmentColor": "#0ea5e9"
+  },
+  {
+    "id": 5,
+    "firstName": "ΔΦΓ",
+    "lastName": "ΓΙΑΝΝΗΣ",
+    "phone": "6900000004",
+    "password": "123",
+    "role": "user",
+    "annualLeaveDays": 20,
+    "mustChangePassword": false,
+    "departmentName": "ΑΛΛΑΝΤΙΚΑ",
+    "departmentColor": "#a855f7"
+  },
+  {
+    "id": 6,
+    "firstName": "ΔΦΓΕΡΡ",
+    "lastName": "ΜΑΝΟΣ",
+    "phone": "6900000005",
+    "password": "123",
+    "role": "user",
+    "annualLeaveDays": 20,
+    "mustChangePassword": false,
+    "departmentName": "ΚΡΕΟΠΩΛΕΙΟ",
+    "departmentColor": "#ef4444"
+  },
+  {
+    "id": 7,
+    "firstName": "ΡΡΤΥ",
+    "lastName": "ΑΝΝΑ",
+    "phone": "6900000006",
+    "password": "123",
+    "role": "user",
+    "annualLeaveDays": 20,
+    "mustChangePassword": false,
+    "departmentName": "ΜΑΝΑΒΙΚΗ",
+    "departmentColor": "#84cc16"
+  },
+  {
+    "id": 8,
+    "firstName": "ΔΗΜΗΤΡΗΣ",
+    "lastName": "ΚΟΝΤΟΣ",
+    "phone": "6900000007",
+    "email": "kontakis@gmail.com",
+    "password": "123",
+    "role": "user",
+    "annualLeaveDays": 25,
+    "mustChangePassword": false,
+    "departmentName": "ΡΑΦΙΑ",
+    "departmentColor": "#22c55e"
+  }
+]

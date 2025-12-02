@@ -1,0 +1,156 @@
+[
+  {
+    "id": 1,
+    "userId": 3,
+    "startDate": "2025-11-24",
+    "endDate": "2025-11-29",
+    "kind": "leave",
+    "type": "annual",
+    "status": "approved",
+    "createdAt": "2025-11-21T23:48:41.155Z",
+    "updatedAt": "2025-11-21T23:53:05.894Z"
+  },
+  {
+    "id": 2,
+    "userId": 3,
+    "startDate": "2025-11-30",
+    "endDate": "2025-11-30",
+    "kind": "repo",
+    "type": "repo",
+    "status": "approved",
+    "createdAt": "2025-11-21T23:48:52.947Z",
+    "updatedAt": "2025-11-21T23:53:06.465Z"
+  },
+  {
+    "id": 3,
+    "userId": 4,
+    "startDate": "2025-11-25",
+    "endDate": "2025-12-02",
+    "kind": "leave",
+    "type": "annual",
+    "status": "approved",
+    "createdAt": "2025-11-21T23:49:23.382Z",
+    "updatedAt": "2025-11-21T23:53:07.162Z"
+  },
+  {
+    "id": 4,
+    "userId": 4,
+    "startDate": "2025-12-04",
+    "endDate": "2025-12-04",
+    "kind": "repo",
+    "type": "repo",
+    "status": "approved",
+    "createdAt": "2025-11-21T23:49:30.577Z",
+    "updatedAt": "2025-11-21T23:53:07.738Z"
+  },
+  {
+    "id": 5,
+    "userId": 5,
+    "startDate": "2025-11-03",
+    "endDate": "2025-11-09",
+    "kind": "leave",
+    "type": "annual",
+    "status": "approved",
+    "createdAt": "2025-11-21T23:50:38.020Z",
+    "updatedAt": "2025-11-21T23:53:08.252Z"
+  },
+  {
+    "id": 6,
+    "userId": 5,
+    "startDate": "2025-11-26",
+    "endDate": "2025-12-04",
+    "kind": "leave",
+    "type": "annual",
+    "status": "approved",
+    "createdAt": "2025-11-21T23:50:49.212Z",
+    "updatedAt": "2025-11-21T23:53:08.808Z"
+  },
+  {
+    "id": 7,
+    "userId": 5,
+    "startDate": "2025-12-06",
+    "endDate": "2025-12-06",
+    "kind": "repo",
+    "type": "repo",
+    "status": "approved",
+    "createdAt": "2025-11-21T23:51:06.936Z",
+    "updatedAt": "2025-11-21T23:53:09.812Z"
+  },
+  {
+    "id": 8,
+    "userId": 6,
+    "startDate": "2025-11-10",
+    "endDate": "2025-11-16",
+    "kind": "leave",
+    "type": "annual",
+    "status": "approved",
+    "createdAt": "2025-11-21T23:51:28.772Z",
+    "updatedAt": "2025-11-21T23:53:10.404Z"
+  },
+  {
+    "id": 9,
+    "userId": 6,
+    "startDate": "2025-11-24",
+    "endDate": "2025-11-29",
+    "kind": "leave",
+    "type": "annual",
+    "status": "approved",
+    "createdAt": "2025-11-21T23:51:47.838Z",
+    "updatedAt": "2025-11-21T23:53:12.520Z"
+  },
+  {
+    "id": 10,
+    "userId": 6,
+    "startDate": "2025-11-30",
+    "endDate": "2025-11-30",
+    "kind": "repo",
+    "type": "repo",
+    "status": "approved",
+    "createdAt": "2025-11-21T23:51:57.216Z",
+    "updatedAt": "2025-11-21T23:53:13.044Z"
+  },
+  {
+    "id": 11,
+    "userId": 7,
+    "startDate": "2025-11-10",
+    "endDate": "2025-11-15",
+    "kind": "leave",
+    "type": "annual",
+    "status": "approved",
+    "createdAt": "2025-11-21T23:52:23.083Z",
+    "updatedAt": "2025-11-21T23:53:13.600Z"
+  },
+  {
+    "id": 12,
+    "userId": 7,
+    "startDate": "2025-11-28",
+    "endDate": "2025-12-05",
+    "kind": "leave",
+    "type": "annual",
+    "status": "approved",
+    "createdAt": "2025-11-21T23:52:38.520Z",
+    "updatedAt": "2025-11-21T23:53:14.180Z"
+  },
+  {
+    "id": 13,
+    "userId": 7,
+    "startDate": "2025-12-07",
+    "endDate": "2025-12-07",
+    "kind": "repo",
+    "type": "repo",
+    "status": "approved",
+    "createdAt": "2025-11-21T23:52:43.669Z",
+    "updatedAt": "2025-11-21T23:53:14.784Z"
+  },
+  {
+    "id": 14,
+    "userId": 8,
+    "startDate": "2025-12-08",
+    "endDate": "2025-12-14",
+    "kind": "leave",
+    "type": "annual",
+    "status": "approved",
+    "createdAt": "2025-12-01T22:27:26.168Z",
+    "updatedAt": "2025-12-01T22:28:11.712Z"
+  }
+]

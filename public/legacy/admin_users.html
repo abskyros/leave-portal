@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="el">
+<head>
+  <meta charset="utf-8"/>
+  <title>Leave Portal – Προσωπικό</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <link rel="stylesheet" href="/styles.css"/>
+</head>
+<body class="bg">
+  <div class="topbar">
+    <img src="/logo.png" class="logo" alt="logo"/>
+    <div class="app-title">Leave Portal – Προσωπικό</div>
+    <div class="spacer"></div>
+    <button class="btn ghost" id="backBtn">Πίσω</button>
+    <button class="btn ghost" id="logout">Αποσύνδεση</button>
+  </div>
+
+  <div class="container">
+    <div class="card">
+      <h2>Προσθήκη Χρήστη</h2>
+      <div class="row">
+        <input id="fn" class="input" placeholder="Όνομα"/>
+        <input id="ln" class="input" placeholder="Επώνυμο"/>
+        <input id="mob" class="input" placeholder="Κινητό"/>
+        <button class="btn" id="add">Προσθήκη</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Λίστα Χρηστών</h2>
+      <div id="users" class="list"></div>
+    </div>
+  </div>
+
+  <script src="/shared.js"></script>
+  <script src="/admin_users.js"></script>
+</body>
+</html>
