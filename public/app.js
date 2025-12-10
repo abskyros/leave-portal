@@ -1235,6 +1235,9 @@ document.addEventListener("DOMContentLoaded", () => {
             <button type="button" class="edit-staff-btn">${
               currentLang === "en" ? "Edit" : "Επεξεργασία"
             }</button>
+            <button type="button" class="delete-staff-btn">${
+              currentLang === "en" ? "Delete" : "Διαγραφή"
+            }</button>
           </td>
         `;
         staffTableBody.appendChild(tr);
@@ -1243,6 +1246,37 @@ document.addEventListener("DOMContentLoaded", () => {
     } catch (err) {
       // ignore
     }
+  }
+
+
+  function deleteStaff(userId) {
+    const confirmMsg =
+      currentLang === "en"
+        ? "Are you sure you want to delete this employee? All their leave requests will also be removed."
+        : "Είστε σίγουροι ότι θέλετε να διαγράψετε αυτό το μέλος; Όλες οι αιτήσεις άδειάς του θα διαγραφούν επίσης.";
+
+    if (!window.confirm(confirmMsg)) {
+      return;
+    }
+
+    apiFetch(`/api/users/${userId}`, {
+      method: "DELETE"
+    })
+      .then(() => loadStaffForAdmin())
+      .then(() => apiFetch("/api/users/basic"))
+      .then((basic) => {
+        basicUsers = basic;
+        renderCalendar();
+        populateAdminEmployeeFilter();
+      })
+      .catch((err) => {
+        alert(
+          err.message ||
+            (currentLang === "en"
+              ? "Error deleting user"
+              : "Σφάλμα διαγραφής χρήστη")
+        );
+      });
   }
 
   staffTableBody.addEventListener("click", (e) => {
@@ -1255,6 +1289,8 @@ document.addEventListener("DOMContentLoaded", () => {
       openStaffEditDialog(tr, userId);
     } else if (btn.classList.contains("history-staff-btn")) {
       openStaffHistory(userId);
+    } else if (btn.classList.contains("delete-staff-btn")) {
+      deleteStaff(userId);
     }
   });
 

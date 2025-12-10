@@ -570,6 +570,30 @@ app.put("/api/users/:id", authRequired, adminRequired, (req, res) => {
   res.json(user);
 });
 
+
+app.delete("/api/users/:id", authRequired, adminRequired, (req, res) => {
+  const userId = parseInt(req.params.id, 10);
+  const user = users.find((u) => u.id === userId);
+
+  if (!user) {
+    return res.status(404).json({ error: "Ο χρήστης δεν βρέθηκε" });
+  }
+
+  if (user.role === "admin") {
+    return res
+      .status(400)
+      .json({ error: "Δεν επιτρέπεται η διαγραφή χρήστη με ρόλο admin" });
+  }
+
+  users = users.filter((u) => u.id !== userId);
+  leaves = leaves.filter((l) => l.userId !== userId);
+
+  saveJSON(USERS_FILE, users);
+  saveJSON(LEAVES_FILE, leaves);
+
+  return res.status(204).end();
+});
+
 // ---------------- LEAVES ----------------
 
 app.get("/api/leaves", authRequired, (req, res) => {

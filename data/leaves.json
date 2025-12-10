@@ -141,16 +141,5 @@
     "status": "approved",
     "createdAt": "2025-11-21T23:52:43.669Z",
     "updatedAt": "2025-11-21T23:53:14.784Z"
-  },
-  {
-    "id": 14,
-    "userId": 8,
-    "startDate": "2025-12-08",
-    "endDate": "2025-12-14",
-    "kind": "leave",
-    "type": "annual",
-    "status": "approved",
-    "createdAt": "2025-12-01T22:27:26.168Z",
-    "updatedAt": "2025-12-01T22:28:11.712Z"
   }
 ]
