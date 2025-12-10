@@ -17,10 +17,10 @@
     "firstName": "ΓΕΩΡΓΙΟΣ",
     "lastName": "ΦΤΟΥΛΗΣ",
     "phone": "6900000001",
-    "password": "1082",
+    "password": "123",
     "role": "user",
     "annualLeaveDays": 20,
-    "mustChangePassword": true,
+    "mustChangePassword": false,
     "departmentName": "ΠΩΛΗΤΗΣ",
     "departmentColor": "ΜΠΛΕ"
   },

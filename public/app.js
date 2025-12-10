@@ -1253,7 +1253,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const confirmMsg =
       currentLang === "en"
         ? "Are you sure you want to delete this employee? All their leave requests will also be removed."
-        : "Είστε σίγουροι ότι θέλετε να διαγράψετε αυτό το μέλος; Όλες οι αιτήσεις άδειάς του θα διαγραφούν επίσης.";
+        : "Είστε σίγουροι ότι θέλετε να διαγράψετε αυτό το μέλος; Όλες οι αιτήσεις άδειά του θα διαγραφούν επίσης.";
 
     if (!window.confirm(confirmMsg)) {
       return;

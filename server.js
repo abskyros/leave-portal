@@ -1,6 +1,7 @@
 // server.js
 const express = require("express");
 const fs = require("fs");
+const https = require("https");
 const path = require("path");
 const crypto = require("crypto");
 const bcrypt = require("bcryptjs");
@@ -56,38 +57,64 @@ let leaves = loadJSON(LEAVES_FILE, []);
 let departments = loadJSON(DEPARTMENTS_FILE, []);
 
 const NOREPLY_EMAIL = process.env.NOREPLY_EMAIL || "no-reply@example.com";
+const RESEND_API_KEY = process.env.RESEND_API_KEY || "";
 
 const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: Number(process.env.SMTP_PORT),
-  secure: false, // STARTTLS
+  host: process.env.SMTP_HOST || "smtp.example.com",
+  port: Number(process.env.SMTP_PORT) || 587,
+  secure: false,
   auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS
-  },
-  tls: {
-    rejectUnauthorized: false
-  },
-  connectionTimeout: 10000,
-  greetingTimeout: 10000,
-  socketTimeout: 10000
+    user: process.env.SMTP_USER || "user@example.com",
+    pass: process.env.SMTP_PASS || "password"
+  }
 });
 
 function sendMail({ to, subject, text }) {
   if (!to) return;
-  transporter.sendMail(
-    {
-      from: `"Portal Αδειών" <${NOREPLY_EMAIL}>`,
-      to,
-      subject,
-      text
+  if (!RESEND_API_KEY) {
+    console.error("RESEND_API_KEY is not configured. Το email δεν στάλθηκε.");
+    return;
+  }
+
+  const payload = JSON.stringify({
+    from: `Portal Αδειών <${NOREPLY_EMAIL}>`,
+    to,
+    subject,
+    text
+  });
+
+  const options = {
+    hostname: "api.resend.com",
+    path: "/emails",
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${RESEND_API_KEY}`,
+      "Content-Type": "application/json",
+      "Content-Length": Buffer.byteLength(payload)
     },
-    (err) => {
-      if (err) {
-        console.error("Αποτυχία αποστολής email:", err.message);
-      }
+    timeout: 10000
+  };
+
+  const req = https.request(options, (res) => {
+    if (res.statusCode && res.statusCode >= 400) {
+      console.error(
+        "Αποτυχία αποστολής email μέσω Resend. Status:",
+        res.statusCode
+      );
     }
-  );
+  });
+
+  req.on("error", (err) => {
+    console.error("Σφάλμα σύνδεσης στο Resend:", err.message);
+  });
+
+  req.on("timeout", () => {
+    console.error("Timeout κατά την αποστολή email μέσω Resend");
+    req.destroy();
+  });
+
+  req.write(payload);
+  req.end();
 }
 
 function sendLeaveStatusEmailToUser(user, leave) {
